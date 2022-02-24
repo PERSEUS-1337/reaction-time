@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Mukta');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Mukta";
+    overflow: hidden;
+    background: #222;
+}
+
+.main {
+    background: #222;
+    height: 100%;
+    width: 100%;
+}
+
+.main .header h1 {
+    color: white;
+    text-align: center;
+    border-bottom: 2px solid white;
+}
+
+.main .rectangle {
+    height: 80vh;
+    width: 90vw;
+    background: rgb(255, 255, 255);
+    color: black;
+    text-align: center;
+    position: relative;
+    margin: auto;
+}
+
+.main .rectangle .number {
+    color: black;
+    text-align: center;
+    position: relative;
+    font-size: 450px;
+    margin: auto;
+}
+
+.main .score {
+    background: #222;
+    width: 100%;
+    height: auto;
+}
+
+.main .score .section-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.main .score #start {
+    font-size: 24px;
+    margin: 20px auto;
+    width: 50%;
+    height: auto;
+    padding: 20px;
+    border: 2px solid white;
+    color: white;
+    font-weight: 800;
+    background-color: rgb(85, 185, 85);
+}
+
+input[id="game-submit"] {
+    /* padding: 20px; */
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 2%;
+    margin-top: 1%;
+    text-align: center;
+    height: 50px;
+    border: 5px solid;
+    background: #5C9BF8;
+    border-radius: 25px;
+    font-size: 25px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[id="game-submit"]:hover {
+    border-color: #9DC4FD;
+    transition: .2s;
+}

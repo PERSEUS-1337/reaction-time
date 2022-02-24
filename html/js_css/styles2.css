@@ -1,0 +1,174 @@
+body {
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #5C9BF8, #E765F5);
+    position:relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* Inside Login Page */
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+}
+
+.center h1 {
+    text-align: center;
+    color: rgb(61, 61, 61);
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.center form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .txt_field {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+/* Inside Instructions Page */
+.instruction-main {
+    /* font-family: serif; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background: white;
+    border-radius: 10px;
+}
+
+.instruction-title h1 {
+    text-align: center;
+    color: rgb(61, 61, 61);
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.instruction-txt h3 {
+    text-align: center;
+    color: rgb(61, 61, 61);
+    padding: 0.2% 2% 2% 2%;
+    border-bottom: 1px solid silver;
+}
+
+
+/* Email Field Input */
+.txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.txt_field label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #696969;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .2s;
+}
+
+.txt_field span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #5C9BF8;
+}
+
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label {
+    top: -5px;
+    color: #5C9BF8;
+}
+
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before {
+    width: 100%
+} 
+
+/* Button in Login */
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+    border: 5px solid;
+    background: #5C9BF8;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover {
+    border-color: #9DC4FD;
+    transition: .2s;
+}
+
+/* Button in Instructions */
+input[id="instruction-submit"] {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 2%;
+    text-align: center;
+    height: 50px;
+    border: 5px solid;
+    background: #5C9BF8;
+    border-radius: 25px;
+    font-size: 25px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[id="instruction-submit"]:hover {
+    border-color: #9DC4FD;
+    transition: .2s;
+}
+
+/* input[id="game-submit"] {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 2%;
+    text-align: center;
+    height: 50px;
+    border: 5px solid;
+    background: #5C9BF8;
+    border-radius: 25px;
+    font-size: 25px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[id="game-submit"]:hover {
+    border-color: #9DC4FD;
+    transition: .2s;
+} */
