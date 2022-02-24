@@ -53,7 +53,7 @@ express()
         console.log(">Instructions Page");
         res.sendFile(path.join(__dirname+instructionsPath));
     })
-    .get("/game", (req, res) => {
+    .get("/game", auth, (req, res) => {
         console.log(">Game Page");
         res.sendFile(path.join(__dirname+gamePath));
     })
@@ -62,7 +62,7 @@ express()
         res.sendFile(path.join(__dirname+loginPath));
         console.log(">Email is: " + req.session.emailStored);
     })
-    .get("/end", (req, res) => {
+    .get("/end", auth, (req, res) => {
         console.log(">End Page");
         res.send("Thank You!");
     })
