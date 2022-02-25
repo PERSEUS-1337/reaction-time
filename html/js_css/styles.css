@@ -5,11 +5,11 @@ body {
     padding: 0px;
     font-family: "Mukta";
     overflow: hidden;
-    background: #222;
+    background: rgb(255, 255, 255);
 }
 
 .main {
-    background: #222;
+    background: rgb(255, 255, 255);
     height: 100%;
     width: 100%;
 }
@@ -22,7 +22,7 @@ body {
 
 .main .rectangle {
     height: 80vh;
-    width: 90vw;
+    width: 100vw;
     background: rgb(255, 255, 255);
     color: black;
     text-align: center;

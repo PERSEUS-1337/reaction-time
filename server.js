@@ -7,11 +7,10 @@ require("dotenv").config();
 
 // paths constants, to reduce typos
 const path = require("path");
-// const defaultPath = "/html/default.html";
 const gamePath = "/html/index.html";
 const loginPath = "/html/login.html";
-const login2Path = "/html/login2.html";
 const instructionsPath = "/html/instructions.html";
+const trialPath = "/html/trial.html";
 
 // middleware functions
 function logger(req, res, next) {
@@ -34,39 +33,59 @@ express()
     .use(logger)
     .use(express.json())
     .use(session({
+
         secret: 'REACTION TIME',
         resave: false,
         saveUninitialized: true
+
     }))
     .get("/", (req, res) => {
+
         console.log(">Default Page");
         console.log("Email is: "+ req.session.emailStored);
         res.redirect("/login");
+
     })
     .use(express.static(path.join(__dirname+'/html')))
     .get("/login", (req, res) => {
-        console.log(">Login Page");
-        res.sendFile(path.join(__dirname+login2Path));
-        console.log(">Email is: " + req.session.emailStored);
-    })
-    .get("/instructions", auth, (req, res) => {
-        console.log(">Instructions Page");
-        res.sendFile(path.join(__dirname+instructionsPath));
-    })
-    .get("/game", auth, (req, res) => {
-        console.log(">Game Page");
-        res.sendFile(path.join(__dirname+gamePath));
-    })
-    .get("/login/legit", auth, async (req, res) => {
+
         console.log(">Login Page");
         res.sendFile(path.join(__dirname+loginPath));
         console.log(">Email is: " + req.session.emailStored);
+
     })
+    .get("/instructions", (req, res) => {
+
+        console.log(">Instructions Page");
+        res.sendFile(path.join(__dirname+instructionsPath));
+
+    })
+    .get("/trial", (req, res) => {
+
+        console.log(">Trial Page");
+        res.sendFile(path.join(__dirname+trialPath));
+    })
+    .get("/game", (req, res) => {
+
+        console.log(">Game Page");
+        res.sendFile(path.join(__dirname+gamePath));
+
+    })
+    // .get("/login/legit", auth, async (req, res) => {
+
+    //     console.log(">Login Page");
+    //     res.sendFile(path.join(__dirname+loginPath));
+    //     console.log(">Email is: " + req.session.emailStored);
+
+    // })
     .get("/end", auth, (req, res) => {
+
         console.log(">End Page");
         res.send("Thank You!");
+
     })
     .post("/game", async (req, res) => {
+
         const { data } = req.body;
         console.log("Data = "+ data);
 
@@ -109,8 +128,8 @@ express()
         for (i = 0; i < data.length; i++) {
             dataArray.push(data[i]);
         }
-
         req.session.dataArray = dataArray;
+
         // Write row(s) to spreadsheet
         await googleSheets.spreadsheets.values.append({
             auth,
@@ -124,11 +143,12 @@ express()
                 ],
             },
         });
-        // res.sendFile(path.join(__dirname+login2Path));
-        // res.redirect("https://first-demo-repo.herokuapp.com/login");
-        res.redirect("http://localhost:5000/login");
-        // res.redirect("/end");
+
         console.log("Successfully Submitted Email: "+req.session.emailStored);
+        // res.sendFile(path.join(__dirname+loginPath));
+        // res.redirect("https://first-demo-repo.herokuapp.com/login");
+        // res.redirect("/login");
+        res.redirect("/end");
     })
     .post("/login", (req, res) => {
         req.session.emailStored = req.body.user.email;
