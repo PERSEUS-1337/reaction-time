@@ -1,7 +1,10 @@
-let rectangle = document.querySelector('.rectangle');
-let randomNumber = document.getElementById('number');
-let start = document.getElementById('start');
-let timeText = document.getElementById('time-text');
+const rectangle = document.querySelector('.rectangle');
+const randomNumber = document.getElementById('number');
+const retryButton = document.getElementById('retry-button');
+const nextButton = document.getElementById('next-button');
+const statsRectangle = document.getElementById('stats-rectangle');
+// let start = document.getElementById('start');
+// let timeText = document.getElementById('time-text');
 
 // Color Constants
 const blueColor = "rgb(103, 165, 255)";
@@ -115,8 +118,6 @@ function changeRandColorNumber() {
         timeHandler();
 
         if (parseInt(sessionStorage.getItem("currIter")) > 3) {
-            // Handles reaction time recording
-            // timeHandler();
 
             // Handles changing of color + recording of color shown in screen
             let currColor = rectangle.style.background = getRandomColor([blueColor, pinkColor]);
@@ -220,6 +221,14 @@ function countDownScreen() {
 }
 
 function showStats() {
+
+    // Hide current rectangle and number, show statistics rectangle and scroe and reaction time
+    randomNumber.style.display = "none"; 
+    rectangle.style.display = "none";
+
+    retryButton.style.display = "block";
+    nextButton.style.display = "block";
+
     // Fetch arrays from session storage
     let timeArray = JSON.parse(sessionStorage.getItem("timeArray"));
     let checkArray = JSON.parse(sessionStorage.getItem("checkArray"));
@@ -244,8 +253,15 @@ function showStats() {
     sessionStorage.setItem("checkResult", checkCounter["1"]);
 }
 
+// function end() {
+
+// }
+
 // Where all code starts executed
 window.onload = function() {
+
+    retryButton.style.display = "none";
+    nextButton.style.display = "none";
     
     // Initiallize vars and arrays to be used in session
     let intervalLimit = 1500;
