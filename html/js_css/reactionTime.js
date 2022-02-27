@@ -235,9 +235,13 @@ function showStats() {
     const checkCounter = checkArray.reduce(function (acc, curr) {
         return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
     }, {});
-      
-    // console.log(checkCounter["1"]);
-    // console.log(avgResult);
+    
+
+    // Displays the number of correct answers and average time
+    let correct_answer = document.getElementById('correct-answer');
+    let avg_time = document.getElementById('avg-time');
+    correct_answer.innerHTML = checkCounter["1"];
+    avg_time.innerHTML = avgResult;
 
     // Store again for use later, fetch data here when showing data to the screen
     sessionStorage.setItem("avgResult", avgResult);
