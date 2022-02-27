@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Mukta');
+/* @import url('https://fonts.googleapis.com/css?family=Mukta'); */
 
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
     padding: 0px;
-    font-family: "Mukta";
+    /* font-family: "Mukta"; */
+    position:relative;
     overflow: hidden;
     background: rgb(255, 255, 255);
 }
@@ -38,49 +40,67 @@ body {
     margin: auto;
 }
 
-.main .score {
-    background: #222;
-    width: 100%;
-    height: auto;
-}
-
-
-input[id="game-submit"] {
-    display: inline-block;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-bottom: 2%;
-    margin-top: 1%;
+.main .stats-rectangle {
+    height: 60vh;
+    width: 75vw;
+    background: linear-gradient(120deg, #7fadf3, #e68df0);
     text-align: center;
-    height: 50px;
-    border: 5px solid;
-    background: #5C9BF8;
-    border-radius: 25px;
-    font-size: 25px;
-    color: #e9f4fb;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
+    position: relative;
+    margin: auto;
+    border-radius: 20px;
+    padding: 5px 5px 5px 5%;
 }
 
-input[id="game-submit"]:hover {
-    border-color: #9DC4FD;
-    transition: .2s;
+.main .answer  {
+    font-size: 100px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: -10%;
+    /* padding: 5px 0 0 0; */
+    /* border-bottom: 4px solid rgb(0, 0, 0); */
+    
 }
 
+.main .correct-answer {
+    font-size: 100px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin:auto;
+    /* margin-top: -10%; */
+    
+}
+
+.main .time {
+    font-size: 100px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* padding: 5px 0 0 0; */
+}
+
+.main .avg-time {
+    font-size: 100px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin:auto;
+    /* margin-top: -10%; */
+}
 
 input[id="next-button"] {
     display: inline-block;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-bottom: 2%;
-    margin-top: 1%;
+    margin: auto;
+    margin-top: 5%;
     text-align: center;
-    height: 50px;
+    /* height: 50px; */
     border: 5px solid;
     background: #5C9BF8;
-    border-radius: 25px;
-    font-size: 25px;
+    border-radius: 10px;
+    font-size: 40px;
     color: #e9f4fb;
     font-weight: 700;
     cursor: pointer;

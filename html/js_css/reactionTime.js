@@ -231,7 +231,7 @@ function showStats() {
     for( i = 0; i < timeArray.length-1; i++ ){
         sum += parseInt( timeArray[i+1], 10 );
     }   
-    let avgResult = (sum/timeArray.length-1).toFixed(2);
+    let avgResult = (sum/timeArray.length-1).toFixed(0);
 
     // Get how many correct answers the user got
     const checkCounter = checkArray.reduce(function (acc, curr) {
@@ -250,12 +250,12 @@ function showStats() {
     sessionStorage.setItem("checkResult", checkCounter["1"]);
 }
 
-
 // Where all code starts executed
 window.onload = function() {
 
     statsRectangle.style.display = "none";
     nextButton.style.display = "none";
+    
     
     // Initiallize vars and arrays to be used in session
     let intervalLimit = 1500;
