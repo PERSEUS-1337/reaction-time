@@ -1,6 +1,7 @@
 const rectangle = document.querySelector('.rectangle');
 const randomNumber = document.getElementById('number');
 const nextButton = document.getElementById('next-button');
+const statsRectangle = document.getElementById('stats-rectangle');
 // let start = document.getElementById('start');
 // let timeText = document.getElementById('time-text');
 
@@ -218,6 +219,7 @@ function showStats() {
     randomNumber.style.display = "none"; 
     rectangle.style.display = "none";
 
+    statsRectangle.style.display = "block";
     nextButton.style.display = "block";
 
     // Fetch arrays from session storage
@@ -252,6 +254,7 @@ function showStats() {
 // Where all code starts executed
 window.onload = function() {
 
+    statsRectangle.style.display = "none";
     nextButton.style.display = "none";
     
     // Initiallize vars and arrays to be used in session
