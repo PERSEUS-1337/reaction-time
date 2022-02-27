@@ -166,13 +166,13 @@ function checkKey(key) {
 
     if (color === "Blue") {
         if (number < 5) {
-            if (key = "Z") {
+            if (key === "Z") {
                 result = 1 
             } else {
                 result = 0
             }
         } else if (number > 5) {
-            if (key = "X") {
+            if (key === "X") {
                 result = 1 
             } else {
                 result = 0
@@ -180,13 +180,13 @@ function checkKey(key) {
         }
     } else {
         if (number % 2 === 1) {
-            if (key = "N") {
+            if (key === "N") {
                 result = 1 
             } else {
                 result = 0
             }
         } else if (number % 2 === 0) {
-            if (key = "M") {
+            if (key === "M") {
                 result = 1 
             } else {
                 result = 0
@@ -237,12 +237,17 @@ function showStats() {
     for( i = 0; i < timeArray.length-1; i++ ){
         sum += parseInt( timeArray[i+1], 10 );
     }   
-    let avgResult = (sum/timeArray.length-1).toFixed(0);
+    console.log(sum);
+    let avgResult = (sum/(timeArray.length-1)).toFixed(0);
 
     // Get how many correct answers the user got
-    const checkCounter = checkArray.reduce(function (acc, curr) {
+    let checkCounter = checkArray.reduce(function (acc, curr) {
         return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
     }, {});
+
+    if (checkCounter["1"] === undefined) {
+        checkCounter["1"] = 0;
+    }
 
     // Displays the number of correct answers and average time
     let correct_answer = document.getElementById('correct-answer');
