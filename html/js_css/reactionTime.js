@@ -265,7 +265,7 @@ window.onload = function() {
     let keyArray = [];      // Stores key pressed by user
     let checkArray = [];    // Stores the array of correct and wrong answers
 
-    if (window.location.href === "http://localhost:5000/trial") {
+    if (window.location.href === "http://localhost:5000/trial" | window.location.href === "https://research-reaction-time.herokuapp.com/trial") {
         maxIter = 5+2;          // Change
         intervalLimit = 3000;
         minusConst = 2
