@@ -54,30 +54,23 @@ express()
         console.log(">Email is: " + req.session.emailStored);
 
     })
-    .get("/instructions", (req, res) => {
+    .get("/instructions", auth, (req, res) => {
 
         console.log(">Instructions Page");
         res.sendFile(path.join(__dirname+instructionsPath));
 
     })
-    .get("/trial", (req, res) => {
+    .get("/trial", auth, (req, res) => {
 
         console.log(">Trial Page");
         res.sendFile(path.join(__dirname+trialPath));
     })
-    .get("/game", (req, res) => {
+    .get("/game", auth, (req, res) => {
 
         console.log(">Game Page");
         res.sendFile(path.join(__dirname+gamePath));
 
     })
-    // .get("/login/legit", auth, async (req, res) => {
-
-    //     console.log(">Login Page");
-    //     res.sendFile(path.join(__dirname+loginPath));
-    //     console.log(">Email is: " + req.session.emailStored);
-
-    // })
     .get("/end", auth, (req, res) => {
 
         console.log(">End Page");

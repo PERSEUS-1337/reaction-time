@@ -5,12 +5,18 @@ const statsRectangle = document.getElementById('stats-rectangle');
 // let start = document.getElementById('start');
 // let timeText = document.getElementById('time-text');
 
+// statsRectangle.style.display = "none";
+// nextButton.style.display = "none";
+
 // Color Constants
 const blueColor = "rgb(103, 165, 255)";
 const pinkColor = "rgb(216, 103, 255)";
 const whiteColor = "rgb(255, 255, 255)";
 
-let maxIter = 10+4;
+let maxIter = 160+4;
+// if (window.location.href === "http://localhost:5000/trial" | window.location.href === "https://research-reaction-time.herokuapp.com/trial") {
+//     maxIter = 5+2;
+// }
 
 function submitData() {
     fetch(window.location.href, {
@@ -237,7 +243,6 @@ function showStats() {
     const checkCounter = checkArray.reduce(function (acc, curr) {
         return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
     }, {});
-    
 
     // Displays the number of correct answers and average time
     let correct_answer = document.getElementById('correct-answer');
@@ -253,8 +258,8 @@ function showStats() {
 // Where all code starts executed
 window.onload = function() {
 
-    statsRectangle.style.display = "none";
-    nextButton.style.display = "none";
+    // statsRectangle.style.display = "none";
+    // nextButton.style.display = "none";
     
     
     // Initiallize vars and arrays to be used in session
@@ -272,7 +277,7 @@ window.onload = function() {
     let keyArray = [];      // Stores key pressed by user
     let checkArray = [];    // Stores the array of correct and wrong answers
 
-    if (window.location.href === "http://localhost:5000/trial" | window.location.href === "https://research-reaction-time.herokuapp.com/trial") {
+    if (window.location.href === "http://localhost:5000/trial?" | window.location.href === "https://research-reaction-time.herokuapp.com/trial?") {
         maxIter = 5+2;          // Change
         intervalLimit = 3000;
         minusConst = 2
@@ -326,19 +331,3 @@ window.onload = function() {
         }  
     };
 };
-
-// module.exports = {
-//     sessionStorageFunc,
-//     getRandomColor,
-//     generateNumber,
-//     changeRandColorNumber,
-//     timeHandler,
-//     checkKey,
-//     countDownScreen,
-//     rectangle: document.querySelector('.rectangle'),
-//     randomNumber: document.getElementById('number'),
-//     blueColor: "rgb(103, 165, 255)",
-//     pinkColor: "rgb(216, 103, 255)",
-//     whiteColor: "rgb(255, 255, 255)",
-//     maxIter: 10+1,
-// }
