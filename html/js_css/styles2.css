@@ -130,7 +130,7 @@ input[type="submit"]:hover {
 
 /* Button in Instructions */
 input[id="instruction-submit"] {
-    width: 40%;
+    display: inline-block;
     margin-left: 30%;
     margin-right: 30%;
     margin-bottom: 2%;
@@ -150,25 +150,3 @@ input[id="instruction-submit"]:hover {
     border-color: #9DC4FD;
     transition: .2s;
 }
-
-/* input[id="game-submit"] {
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-bottom: 2%;
-    text-align: center;
-    height: 50px;
-    border: 5px solid;
-    background: #5C9BF8;
-    border-radius: 25px;
-    font-size: 25px;
-    color: #e9f4fb;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
-}
-
-input[id="game-submit"]:hover {
-    border-color: #9DC4FD;
-    transition: .2s;
-} */
