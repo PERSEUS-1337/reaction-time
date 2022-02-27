@@ -1,8 +1,6 @@
 const rectangle = document.querySelector('.rectangle');
 const randomNumber = document.getElementById('number');
-const retryButton = document.getElementById('retry-button');
 const nextButton = document.getElementById('next-button');
-const statsRectangle = document.getElementById('stats-rectangle');
 // let start = document.getElementById('start');
 // let timeText = document.getElementById('time-text');
 
@@ -11,11 +9,7 @@ const blueColor = "rgb(103, 165, 255)";
 const pinkColor = "rgb(216, 103, 255)";
 const whiteColor = "rgb(255, 255, 255)";
 
-let maxIter = 20+4;
-
-if (window.location.href === "http://localhost:5000/trial") {
-    maxIter = 10+4;
-}
+let maxIter = 10+4;
 
 function submitData() {
     fetch(window.location.href, {
@@ -29,7 +23,7 @@ function submitData() {
         }).then(()=>{console.log("Submitted to server.js")})
 }
 
-function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray) {
+function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray, minusConst) {
 
     sessionStorage.setItem("currIter", currIter);
     sessionStorage.setItem("currNum", currNum);
@@ -38,6 +32,7 @@ function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimi
     sessionStorage.setItem("intervalLimit", intervalLimit);
     sessionStorage.setItem("avgResult", avgResult);
     sessionStorage.setItem("checkResult", checkResult);
+    sessionStorage.setItem("minusConst", minusConst);
     sessionStorage.setItem("timeArray", JSON.stringify(timeArray));
     sessionStorage.setItem("numArray", JSON.stringify(numArray));
     sessionStorage.setItem("colArray", JSON.stringify(colArray));
@@ -56,19 +51,19 @@ function prepareForFetch() {
 
     let dataArray = [];
 
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4 - parseInt(sessionStorage.getItem("minusConst"))); i++) {           // Change
         dataArray.push(timeArray[i+1]);
     }
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4 - parseInt(sessionStorage.getItem("minusConst"))); i++) {           // Change
         dataArray.push(numArray[i]);
     }
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4 - parseInt(sessionStorage.getItem("minusConst"))); i++) {           // Change
         dataArray.push(colArray[i]);
     }
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4 - parseInt(sessionStorage.getItem("minusConst"))); i++) {           // Change
         dataArray.push(keyArray[i]);
     }
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4 - parseInt(sessionStorage.getItem("minusConst"))); i++) {           // Change
         dataArray.push(checkArray[i]);
     }
     sessionStorage.setItem("dataArray", JSON.stringify(dataArray));
@@ -102,22 +97,17 @@ function generateNumber(currNum) {
 
 function changeRandColorNumber() {
 
-    // if (parseInt(sessionStorage.getItem("currIter")) === 0) {
-    //     sessionStorage.setItem("intervalLimit", 1500);
-    // }
-
     let temp = parseInt(sessionStorage.getItem("currIter"))+1;
     sessionStorage.setItem("currIter", temp);
+
+    timeHandler();
     
     if (parseInt(sessionStorage.getItem("currIter")) < maxIter) {
 
-        // let temp = parseInt(sessionStorage.getItem("currIter"))+1;
-        // sessionStorage.setItem("currIter", temp);
-
         // Handles reaction time recording
-        timeHandler();
+        // timeHandler();
 
-        if (parseInt(sessionStorage.getItem("currIter")) > 3) {
+        if (parseInt(sessionStorage.getItem("currIter")) > (3 - parseInt(sessionStorage.getItem("minusConst")))) {         // Change
 
             // Handles changing of color + recording of color shown in screen
             let currColor = rectangle.style.background = getRandomColor([blueColor, pinkColor]);
@@ -138,9 +128,11 @@ function changeRandColorNumber() {
 
         }
     } else if (parseInt(sessionStorage.getItem("currIter")) === maxIter) {
+
         showStats();
         prepareForFetch();
         return;
+
     }
 }
 
@@ -149,9 +141,9 @@ function timeHandler() {
     let timeArray = JSON.parse(sessionStorage.getItem("timeArray"));
     let reactionTime = new Date().getTime() - sessionStorage.getItem("currTime");
 
-    if (parseInt(sessionStorage.getItem("currIter")) > 3) {
-    timeArray.push(reactionTime);
-    sessionStorage.setItem("timeArray", JSON.stringify(timeArray));
+    if (parseInt(sessionStorage.getItem("currIter")) > (3 - parseInt(sessionStorage.getItem("minusConst"))) && parseInt(sessionStorage.getItem("currIter")) < maxIter+1) {         // Change
+        timeArray.push(reactionTime);
+        sessionStorage.setItem("timeArray", JSON.stringify(timeArray));
     }
     
     let currTime = new Date().getTime();
@@ -197,7 +189,7 @@ function checkKey(key) {
 
     let currIter = parseInt(sessionStorage.getItem("currIter"));
     let checkArray = JSON.parse(sessionStorage.getItem("checkArray"));
-    checkArray[currIter-4] = result;
+    checkArray[currIter-2] = result;            // Change
     sessionStorage.setItem("checkArray", JSON.stringify(checkArray));
 
 }
@@ -226,7 +218,6 @@ function showStats() {
     randomNumber.style.display = "none"; 
     rectangle.style.display = "none";
 
-    retryButton.style.display = "block";
     nextButton.style.display = "block";
 
     // Fetch arrays from session storage
@@ -253,14 +244,10 @@ function showStats() {
     sessionStorage.setItem("checkResult", checkCounter["1"]);
 }
 
-// function end() {
-
-// }
 
 // Where all code starts executed
 window.onload = function() {
 
-    retryButton.style.display = "none";
     nextButton.style.display = "none";
     
     // Initiallize vars and arrays to be used in session
@@ -271,22 +258,29 @@ window.onload = function() {
     let currTime = new Date().getTime();
     let avgResult = 0;
     let checkResult = 0;
+    let minusConst = 0;
     let timeArray = [];     // Stores reaction times
     let numArray = [];      // Stores number shown in screen
     let colArray = [];      // Stores color shwon in screen
     let keyArray = [];      // Stores key pressed by user
     let checkArray = [];    // Stores the array of correct and wrong answers
 
+    if (window.location.href === "http://localhost:5000/trial") {
+        maxIter = 5+2;          // Change
+        intervalLimit = 3000;
+        minusConst = 2
+    }
+
     // Initiallize arrays
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4-minusConst); i++) {           // Change
         checkArray[i] = 0;
     }
-    for (i = 0; i < maxIter-4; i++) {
+    for (i = 0; i < maxIter-(4-minusConst); i++) {           // Change
         keyArray[i] = "N/A";
     }
     
     // Stores initiallized variables to sessionStorage unique to user
-    sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray);
+    sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray, minusConst);
     
     // Start the interval every 1.5s
     // Also execute function immediately to start
@@ -300,7 +294,7 @@ window.onload = function() {
         // Checks if reached iteration limit
         currIter = parseInt(sessionStorage.getItem("currIter"));
         
-        if (currIter < maxIter && currIter > 3) {
+        if (currIter < maxIter && currIter > (3 - parseInt(sessionStorage.getItem("minusConst")))) {           // Change
 
             // Records keypresses, correct or incorrect
             key = key || window.event;
@@ -311,7 +305,7 @@ window.onload = function() {
 
                 // Records keypresses once they are allowed from the conditions above
                 keyArray = JSON.parse(sessionStorage.getItem("keyArray"));
-                keyArray[currIter-4] = keyName;
+                keyArray[currIter-(4 - parseInt(sessionStorage.getItem("minusConst")))] = keyName;         // Change
                 sessionStorage.setItem("keyArray", JSON.stringify(keyArray));
 
                 // Checks if correct or not
