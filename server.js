@@ -114,7 +114,7 @@ express()
         const getRows = await googleSheets.spreadsheets.values.get({
             auth,
             spreadsheetId,
-            range: "Sheet1!A:A",
+            range: "TestSheet!A:A",
         });
 
         let dataArray = [req.session.sessionDate, req.session.emailStored];
