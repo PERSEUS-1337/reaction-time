@@ -127,8 +127,7 @@ express()
         await googleSheets.spreadsheets.values.append({
             auth,
             spreadsheetId,
-            range: "Sheet1",
-            // majorDimension: "COLUMNS",
+            range: "OfficialSheet",
             valueInputOption: "USER_ENTERED",
             resource: {
                 values: [
@@ -138,17 +137,11 @@ express()
         });
 
         console.log("Successfully Submitted Email: "+req.session.emailStored);
-        // res.sendFile(path.join(__dirname+loginPath));
-        // res.redirect("https://first-demo-repo.herokuapp.com/login");
-        // res.redirect("/login");
         res.redirect("/end");
     })
     .post("/login", (req, res) => {
         req.session.emailStored = req.body.user.email;
         console.log("Email is: (session)"+ req.session.emailStored);
-        // res.sendFile(path.join(__dirname+instructionsPath));
-        // res.redirect("https://first-demo-repo.herokuapp.com/instructions");
-        // res.redirect("http://localhost:5000/instructions");
         res.redirect("/instructions");
     })
     .listen(PORT, () => console.log(`Listening on ${ PORT }`));
