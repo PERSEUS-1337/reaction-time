@@ -2,7 +2,7 @@ body {
     margin:0;
     padding:0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(120deg, #5C9BF8, #E765F5);
+    background: linear-gradient(120deg, #7fadf3, #e68df0);
     position:relative;
     height: 100vh;
     overflow: hidden;
@@ -15,7 +15,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 50vw;
+    max-width: 500px;
     background: white;
     border-radius: 10px;
 }
@@ -23,7 +24,7 @@ body {
 .center h1 {
     text-align: center;
     color: rgb(61, 61, 61);
-    padding: 0 0 20px 0;
+    padding: 0 0 1% 0;
     border-bottom: 1px solid silver;
 }
 
@@ -40,25 +41,30 @@ form .txt_field {
 
 /* Inside Instructions Page */
 .instruction-main {
-    /* font-family: serif; */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 80vw;
     background: white;
     border-radius: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .instruction-title h1 {
+    font-size: 250%;
     text-align: center;
     color: rgb(61, 61, 61);
-    padding: 0 0 20px 0;
+    padding: 1% 0 1% 0;
+    margin: auto;
     border-bottom: 1px solid silver;
 }
 
-.instruction-txt h3 {
-    text-align: center;
+.instruction-txt [id="instruction-txt"] {
+    line-break: auto;
+    font-size: min(150%, 210%);
+    text-align: justify;
     color: rgb(61, 61, 61);
     padding: 0.2% 2% 2% 2%;
     border-bottom: 1px solid silver;
@@ -109,14 +115,15 @@ form .txt_field {
 } 
 
 /* Button in Login */
-input[type="submit"] {
+input[id="submit-email"] {
     width: 100%;
     height: 50px;
-    margin-bottom: 30px;
+    margin: auto;
+    margin-bottom: 8%;
     border: 5px solid;
     background: #5C9BF8;
     border-radius: 25px;
-    font-size: 18px;
+    font-size: 20px;
     color: #e9f4fb;
     font-weight: 700;
     cursor: pointer;
@@ -130,16 +137,13 @@ input[type="submit"]:hover {
 
 /* Button in Instructions */
 input[id="instruction-submit"] {
-    display: inline-block;
-    /* margin-left: 30%;
-    margin-right: 30%;
-    margin-bottom: 2%; */
-    text-align: center;
+    width: 100%;
     height: 50px;
+    margin-bottom: 3%;
     border: 5px solid;
     background: #5C9BF8;
     border-radius: 25px;
-    font-size: 25px;
+    font-size: 20px;
     color: #e9f4fb;
     font-weight: 700;
     cursor: pointer;

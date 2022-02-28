@@ -7,28 +7,25 @@
         <link href="./js_css/styles.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <div class="main">
-            <div class="header">
-                <h1>Reaction Test</h1>
-            </div>
+        <div class="game-main">
             <div class="rectangle">
                 <div class="number" id="number"></div>
             </div>
             <div id="stats-rectangle" class="stats-rectangle">
+                <h1>TEST RESULTS</h1>
                 <div id="answer" class="answer">
-                    <p>Correct Answers:</p>
+                    <h2>Correct Answers:</h2>
                     <p id="correct-answer" class="correct-answer"></p>
                 </div>
                 <div id="time" class="time">
-                    <p>Average Reaction Time:</p>
+                    <h2>Average Reaction Time (in ms):</h2>
                     <p id="avg-time" class="avg-time"></p>
                 </div>
+                <form action="/end">
+                    <input type="submit" value="Press to FINISH TEST" id="next-button" onclick="submitData()"/>
+                </form>
             </div>
         </div>
-        <form action="/end">
-        <!-- <form >; -->
-            <input type="submit" value="Press to finish test" id="next-button" onclick="submitData()"/>
-        </form>
     </body>
     <script src="./js_css/reactionTime.js"></script>
 </html>

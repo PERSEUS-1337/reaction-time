@@ -5,16 +5,16 @@ const statsRectangle = document.getElementById('stats-rectangle');
 // let start = document.getElementById('start');
 // let timeText = document.getElementById('time-text');
 
-// statsRectangle.style.display = "none";
-// nextButton.style.display = "none";
+statsRectangle.style.display = "none";
+nextButton.style.display = "none";
 
 // Color Constants
 const blueColor = "rgb(103, 165, 255)";
 const pinkColor = "rgb(216, 103, 255)";
 const whiteColor = "rgb(255, 255, 255)";
 
-let maxIter = 160+4;
-// if (window.location.href === "http://localhost:5000/trial" | window.location.href === "https://research-reaction-time.herokuapp.com/trial") {
+// let maxIter = 50+4;
+// if (window.location.href.indexOf("trial") > -1) {
 //     maxIter = 5+2;
 // }
 
@@ -30,7 +30,7 @@ function submitData() {
         }).then(()=>{console.log("Submitted to server.js")})
 }
 
-function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray, minusConst) {
+function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray, minusConst, maxIter) {
 
     sessionStorage.setItem("currIter", currIter);
     sessionStorage.setItem("currNum", currNum);
@@ -40,6 +40,7 @@ function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimi
     sessionStorage.setItem("avgResult", avgResult);
     sessionStorage.setItem("checkResult", checkResult);
     sessionStorage.setItem("minusConst", minusConst);
+    sessionStorage.setItem("maxIter", maxIter);
     sessionStorage.setItem("timeArray", JSON.stringify(timeArray));
     sessionStorage.setItem("numArray", JSON.stringify(numArray));
     sessionStorage.setItem("colArray", JSON.stringify(colArray));
@@ -49,6 +50,7 @@ function sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimi
 }
 
 function prepareForFetch() {
+    let maxIter = parseInt(sessionStorage.getItem("maxIter"));
     // Get timeArray and numArray from user session and store to a unified data array, to be passed to submitData() as one whole array
     let timeArray = JSON.parse(sessionStorage.getItem("timeArray"));
     let numArray = JSON.parse(sessionStorage.getItem("numArray"));
@@ -103,6 +105,7 @@ function generateNumber(currNum) {
 }
 
 function changeRandColorNumber() {
+    let maxIter = parseInt(sessionStorage.getItem("maxIter"));
 
     let temp = parseInt(sessionStorage.getItem("currIter"))+1;
     sessionStorage.setItem("currIter", temp);
@@ -144,6 +147,8 @@ function changeRandColorNumber() {
 }
 
 function timeHandler() {
+    let maxIter = parseInt(sessionStorage.getItem("maxIter"));
+    
     // Fetches current time array in user session and updates it
     let timeArray = JSON.parse(sessionStorage.getItem("timeArray"));
     let reactionTime = new Date().getTime() - sessionStorage.getItem("currTime");
@@ -262,10 +267,10 @@ function showStats() {
 
 // Where all code starts executed
 window.onload = function() {
+    // alert(window.location.href);
 
     // statsRectangle.style.display = "none";
     // nextButton.style.display = "none";
-    
     
     // Initiallize vars and arrays to be used in session
     let intervalLimit = 1500;
@@ -276,14 +281,15 @@ window.onload = function() {
     let avgResult = 0;
     let checkResult = 0;
     let minusConst = 0;
+    let maxIter = 160+4
     let timeArray = [];     // Stores reaction times
     let numArray = [];      // Stores number shown in screen
     let colArray = [];      // Stores color shwon in screen
     let keyArray = [];      // Stores key pressed by user
     let checkArray = [];    // Stores the array of correct and wrong answers
 
-    if (window.location.href === "http://localhost:5000/trial?" | window.location.href === "https://research-reaction-time.herokuapp.com/trial?") {
-        maxIter = 5+2;          // Change
+    if (window.location.href.indexOf("trial") !== -1) {
+        maxIter = 5+2;
         intervalLimit = 3000;
         minusConst = 2
     }
@@ -297,13 +303,12 @@ window.onload = function() {
     }
     
     // Stores initiallized variables to sessionStorage unique to user
-    sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray, minusConst);
+    sessionStorageFunc(currIter, currNum, currColor, currTime, intervalLimit, avgResult, checkResult, timeArray, numArray, colArray, keyArray, checkArray, minusConst, maxIter);
     
     // Start the interval every 1.5s
     // Also execute function immediately to start
     countDownScreen();
     let handle = setInterval(changeRandColorNumber, sessionStorage.getItem("intervalLimit"));
-    
     
     // Handles keypresses
     window.onkeypress = function(key) {
