@@ -127,7 +127,7 @@ express()
         await googleSheets.spreadsheets.values.append({
             auth,
             spreadsheetId,
-            range: "Sheet1!A:ADV",
+            range: "Sheet1",
             valueInputOption: "USER_ENTERED",
             resource: {
                 values: [
