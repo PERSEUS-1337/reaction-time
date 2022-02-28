@@ -111,11 +111,11 @@ express()
         });
     
         // Read rows from spreadsheet
-        const getRows = await googleSheets.spreadsheets.values.get({
-            auth,
-            spreadsheetId,
-            range: "TestSheet!A:A",
-        });
+        // const getRows = await googleSheets.spreadsheets.values.get({
+        //     auth,
+        //     spreadsheetId,
+        //     range: "TestSheet!A:A",
+        // });
 
         let dataArray = [req.session.sessionDate, req.session.emailStored];
         for (i = 0; i < data.length; i++) {
