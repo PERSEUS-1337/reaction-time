@@ -2,8 +2,6 @@ const rectangle = document.querySelector('.rectangle');
 const randomNumber = document.getElementById('number');
 const nextButton = document.getElementById('next-button');
 const statsRectangle = document.getElementById('stats-rectangle');
-// let start = document.getElementById('start');
-// let timeText = document.getElementById('time-text');
 
 statsRectangle.style.display = "none";
 nextButton.style.display = "none";
@@ -12,11 +10,6 @@ nextButton.style.display = "none";
 const blueColor = "rgb(103, 165, 255)";
 const pinkColor = "rgb(216, 103, 255)";
 const whiteColor = "rgb(255, 255, 255)";
-
-// let maxIter = 50+4;
-// if (window.location.href.indexOf("trial") > -1) {
-//     maxIter = 5+2;
-// }
 
 function submitData() {
     fetch(window.location.href, {
@@ -184,14 +177,14 @@ function checkKey(key) {
             }
         }
     } else {
-        if (number % 2 === 1) {
-            if (key === "N") {
+        if (number % 2 == 0) {
+            if (key === "M") {
                 result = 1 
             } else {
                 result = 0
             }
-        } else if (number % 2 === 0) {
-            if (key === "M") {
+        } else {
+            if (key === "N") {
                 result = 1 
             } else {
                 result = 0
@@ -201,7 +194,7 @@ function checkKey(key) {
 
     let currIter = parseInt(sessionStorage.getItem("currIter"));
     let checkArray = JSON.parse(sessionStorage.getItem("checkArray"));
-    checkArray[currIter-2] = result;            // Change
+    checkArray[currIter-(4 - parseInt(sessionStorage.getItem("minusConst")))] = result;            // Change
     sessionStorage.setItem("checkArray", JSON.stringify(checkArray));
 
 }
@@ -267,11 +260,7 @@ function showStats() {
 
 // Where all code starts executed
 window.onload = function() {
-    // alert(window.location.href);
 
-    // statsRectangle.style.display = "none";
-    // nextButton.style.display = "none";
-    
     // Initiallize vars and arrays to be used in session
     let intervalLimit = 1500;
     let currIter = 0;
