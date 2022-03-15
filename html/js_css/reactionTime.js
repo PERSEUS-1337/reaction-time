@@ -258,6 +258,8 @@ function showStats() {
     sessionStorage.setItem("checkResult", checkCounter["1"]);
 }
 
+
+
 // Where all code starts executed
 window.onload = function() {
 
@@ -277,10 +279,10 @@ window.onload = function() {
     let keyArray = [];      // Stores key pressed by user
     let checkArray = [];    // Stores the array of correct and wrong answers
 
-    if (window.location.href.indexOf("trial") !== -1) {
-        maxIter = 5+2;
-        intervalLimit = 3000;
-        minusConst = 2
+    if (window.location.href.indexOf("trial") !== -1) {     //Change for trial
+        maxIter = 10+4;
+        // intervalLimit = 3000;
+        // minusConst = 2
     }
 
     // Initiallize arrays
